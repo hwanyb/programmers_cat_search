@@ -115,9 +115,9 @@ HTTP/1.1 200 OK
 ```
 3. GET /cats/:id
 ##### Request Parameter
-    |Field name|Type|Description|
-    |---|---|---|
-    |id|string|고양이 사진의 id값 입니다.|
+|Field name|Type|Description|
+|---|---|---|
+|id|string|고양이 사진의 id값 입니다.|
 ##### Query paramter
     None
 ##### Response
