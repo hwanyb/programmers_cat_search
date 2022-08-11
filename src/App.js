@@ -1,3 +1,4 @@
+import { request } from "./api.js";
 import ImageInfo from "./components/ImageInfo.js";
 import SearchInput from "./components/SearchInput.js";
 import SearchResult from "./components/SearchResult.js";
@@ -13,8 +14,10 @@ export default class App {
 
     this.searchInput = new SearchInput({
       $target,
-      onSearch: keyword => {
-        api.fetchCats(keyword).then(({ data }) => this.setState(data));
+      onSearch: async (keyword) => {
+        const searchData = await request('search', keyword);
+        this.setState(searchData);
+        console.log(searchData);
       }
     });
 

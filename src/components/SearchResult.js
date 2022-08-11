@@ -20,8 +20,12 @@ export default class SearchResult {
     }
   
     render() {
-      this.$searchResult.innerHTML = this.data
-        .map(
+      if(this.data.data === undefined){
+        this.$searchResult.innerHTML = `
+          <p>검색결과가 없습니다.</p>
+        `;
+      }else{
+        this.$searchResult.innerHTML = this.data?.data?.map(
           cat => `
             <div class="item">
               <img src=${cat.url} alt=${cat.name} />
@@ -35,6 +39,7 @@ export default class SearchResult {
           this.onClick(this.data[index]);
         });
       });
+      }
     }
   }
   
