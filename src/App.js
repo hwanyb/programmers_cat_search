@@ -1,5 +1,8 @@
 import { request } from "./api.js";
+import Header from "./components/Header.js";
+
 import ImageInfo from "./components/ImageInfo.js";
+import RandomBanner from "./components/RandomBanner.js";
 import SearchInput from "./components/SearchInput.js";
 import SearchResult from "./components/SearchResult.js";
 
@@ -12,6 +15,11 @@ export default class App {
   constructor($target) {
     this.$target = $target;
 
+    this.header = new Header({
+        $target,
+        
+    });
+    
     this.searchInput = new SearchInput({
       $target,
       onSearch: async (keyword) => {
@@ -20,6 +28,15 @@ export default class App {
         console.log(searchData);
       }
     });
+    this.randomBanner = new RandomBanner({
+        $target,
+        // initialData,
+        // getRandomData: async () => {
+        //     const randomData = await request('random');
+        //     initialData = randomData
+        //     console.log(randomData)
+        // },
+    })
 
     this.searchResult = new SearchResult({
       $target,
