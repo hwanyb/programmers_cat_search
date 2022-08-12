@@ -46,6 +46,11 @@ export default class App {
         visible: false,
         image: null,
       },
+      closeImage: () => {
+        this.imageInfo.setState({
+          visible: false
+        })
+      }
     });
   }
 
