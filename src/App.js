@@ -1,12 +1,10 @@
 import { request } from "./api.js";
-import Header from "./components/Header.js";
 
+import Header from "./components/Header.js";
 import ImageInfo from "./components/ImageInfo.js";
 import RandomBanner from "./components/RandomBanner.js";
 import SearchInput from "./components/SearchInput.js";
 import SearchResult from "./components/SearchResult.js";
-
-console.log("app is running!");
 
 export default class App {
   $target = null;
@@ -16,50 +14,43 @@ export default class App {
     this.$target = $target;
 
     this.header = new Header({
-        $target,
-        
+      $target,
     });
-    
+
     this.searchInput = new SearchInput({
       $target,
       onSearch: async (keyword) => {
-        const searchData = await request('search', keyword);
+        const searchData = await request("search", keyword);
         this.setState(searchData);
-        console.log(searchData);
-      }
+      },
     });
     this.randomBanner = new RandomBanner({
-        $target,
-        // initialData,
-        // getRandomData: async () => {
-        //     const randomData = await request('random');
-        //     initialData = randomData
-        //     console.log(randomData)
-        // },
-    })
+      $target,
+    });
 
     this.searchResult = new SearchResult({
       $target,
       initialData: this.data,
-      onClick: image => {
+      onClick: async (id) => {
+        const infoData = await request("", id);
         this.imageInfo.setState({
           visible: true,
-          image
+          image: infoData.data,
         });
-      }
+      },
     });
 
     this.imageInfo = new ImageInfo({
       $target,
       data: {
         visible: false,
-        image: null
-      }
+        image: null,
+      },
     });
   }
 
   setState(nextData) {
-    console.log(this);
+    // console.log(this);
     this.data = nextData;
     this.searchResult.setState(nextData);
   }
